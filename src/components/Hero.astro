@@ -1,0 +1,171 @@
+---
+// Hero section component
+export interface Props {
+    site: {
+        tagline: string;
+        description: string;
+    };
+}
+
+const { site } = Astro.props;
+---
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="typewriter" data-text={site.tagline}></span>
+        </h1>
+        <p class="hero-subtitle">{site.description}</p>
+        <button class="cta-button">Explore Collection</button>
+    </div>
+</section>
+
+<style>
+/* Hero Section - Minimalistic */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 80px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    line-height: 1.2;
+    min-height: 4.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.cta-button:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 120px 20px 50px;
+    }
+    
+    .hero-content {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .perfume-bottle {
+        width: 200px;
+        height: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script>
+// Typewriter animation and CTA button functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Typewriter animation
+    const typewriterElement = document.querySelector('.typewriter');
+    const cursorElement = document.querySelector('.cursor');
+    
+    if (typewriterElement) {
+        const text = typewriterElement.getAttribute('data-text') || '';
+        typewriterElement.textContent = '';
+        
+        let i = 0;
+        const typeSpeed = 100; // milliseconds per character
+        
+        function typeWriter() {
+            if (i < text.length) {
+                typewriterElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, typeSpeed);
+            }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeWriter, 500);
+    }
+    
+    // CTA button scroll to collection
+    const ctaButton = document.querySelector('.cta-button');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', function() {
+            document.getElementById('collection')?.scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+});
+</script>
