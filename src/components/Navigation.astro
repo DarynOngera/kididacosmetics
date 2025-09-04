@@ -56,32 +56,56 @@ const { navigation, site } = Astro.props;
     </div>
 </nav>
 
-<script>
+<script is:inline>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
-    hamburger.addEventListener('click', function() {
+    if (!hamburger || !navMenu) return;
+    
+    // Handle both click and touch events for better mobile compatibility
+    function toggleMenu(e) {
+        e.preventDefault();
+        e.stopPropagation();
         navMenu.classList.toggle('active');
         hamburger.classList.toggle('active');
-    });
+        
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+    
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('touchstart', toggleMenu, { passive: false });
     
     // Close menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-menu a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+    navLinks.forEach(function(link) {
+        function closeMenu() {
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
-        });
+            document.body.style.overflow = '';
+        }
+        
+        link.addEventListener('click', closeMenu);
+        link.addEventListener('touchstart', closeMenu);
     });
     
     // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+    function handleOutsideClick(event) {
+        const target = event.target;
+        if (target && !hamburger.contains(target) && !navMenu.contains(target)) {
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
+            document.body.style.overflow = '';
         }
-    });
+    }
+    
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
 });
 </script>
 
@@ -186,6 +210,12 @@ document.addEventListener('DOMContentLoaded', function() {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    padding: 10px;
+    margin: -10px;
+    z-index: 1001;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .hamburger span {
@@ -194,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
     background: #2c2c2c;
     margin: 3px 0;
     transition: 0.3s;
+    display: block;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -226,20 +257,36 @@ document.addEventListener('DOMContentLoaded', function() {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 60px;
+        top: 0;
         flex-direction: column;
         background-color: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(10px);
         width: 100%;
+        height: 100vh;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.3s ease-in-out;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
-        padding: 2rem 0;
-        z-index: 999;
+        padding: 6rem 0 2rem 0;
+        z-index: 1000;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .nav-menu.active {
         left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-menu a {
+        font-size: 1.2rem;
+        padding: 1rem;
+        display: block;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
 }
 
