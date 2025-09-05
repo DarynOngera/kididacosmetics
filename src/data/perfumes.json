@@ -1,14 +1,14 @@
 {
   "products": [
     {
-      "id": "midnight-elegance",
-      "slug": "midnight-elegance",
-      "name": "Midnight Elegance",
-      "description": "A sophisticated blend that captures the essence of twilight sophistication",
+      "id": "elizabeth-arden",
+      "slug": "elizabeth-arden",
+      "name": "Elizabeth Arden, 5th Avenue",
+      "description": "A vibrant and energizing essence of the world's most famous avenues",
       "price": 180,
-      "category": "Oriental",
+      "category": "Floral",
       "productType": "perfume",
-      "gender": "unisex",
+      "gender": "female",
       "notes": {
         "top": ["Bergamot", "Black Pepper"],
         "middle": ["Rose", "Jasmine"],
@@ -19,14 +19,14 @@
       "featured": true
     },
     {
-      "id": "golden-dawn",
-      "slug": "golden-dawn",
-      "name": "Golden Dawn",
-      "description": "Fresh citrus awakening with warm amber embrace",
+      "id": "versace-bright",
+      "slug": "versace-bright",
+      "name": "Versace Bright Crystal",
+      "description": "Floral and fruity fragrance for her by Versace.",
       "price": 220,
-      "category": "Citrus",
+      "category": "Floral",
       "productType": "perfume",
-      "gender": "unisex",
+      "gender": "female",
       "notes": {
         "top": ["Lemon", "Orange Blossom"],
         "middle": ["Neroli", "Petitgrain"],
@@ -37,18 +37,18 @@
       "featured": true
     },
     {
-      "id": "velvet-rose",
-      "slug": "velvet-rose",
-      "name": "Velvet Rose",
-      "description": "Luxurious rose garden in full bloom with creamy vanilla whispers",
+      "id": "gardenia",
+      "slug": "gardenia",
+      "name": "Gardenia, Elizabeth Taylor",
+      "description": "Luxurious lily garden in full bloom with carnation whispers",
       "price": 195,
       "category": "Floral",
       "productType": "perfume",
       "gender": "female",
       "notes": {
-        "top": ["Bulgarian Rose", "Peony"],
-        "middle": ["Rose Petals", "Lily"],
-        "base": ["Vanilla", "White Musk"]
+        "top": ["green leaves", "lily"],
+        "middle": ["gardenia", "peony", "orchid"],
+        "base": ["carnation", "white musk"]
       },
       "image": "/images/gardenia.jpg",
       "inStock": true,
